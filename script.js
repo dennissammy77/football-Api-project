@@ -10,8 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please enter a team name.");
                 return;
             }
+            const myHeaders = new Headers();
+myHeaders.append("x-apisports-key", "3598968c65d12200b3e3282615b71daa");
 
-            try {
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch(`https://v3.football.api-sports.io/teams?name=${teamName}`, requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+          /*  try {
                 const response = await fetch(`http://localhost:5000/api/teams?name=${teamName}`);
                 const data = await response.json();
 
@@ -30,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
+                */
         });
     } else {
         console.error("Button not found!");
